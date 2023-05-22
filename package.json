@@ -1,0 +1,21 @@
+{
+  "name": "onshape-openapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "vite-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "onshape"
+  ],
+  "author": "Blake Bourque",
+  "license": "ISC",
+  "devDependencies": {
+    "vite-node": "^0.31.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
