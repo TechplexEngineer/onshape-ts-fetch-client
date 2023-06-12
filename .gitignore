@@ -2,3 +2,7 @@
 node_modules
 openapitools.json
 .idea
+dist
+*.tar.gz
+*.tgz
+.env

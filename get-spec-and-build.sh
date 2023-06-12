@@ -8,6 +8,6 @@ rm -rf src/generated-sources/openapi
 
 npx @openapitools/openapi-generator-cli generate \
 	-i ./openapi.json \
-	-o onshape_api \
+	-o src/onshape_api \
 	-g typescript-fetch \
 	--additional-properties=supportsES6=true,npmVersion=6.9.0,typescriptThreePlus=true
