@@ -44,15 +44,9 @@ jobs:
         npm install
         npm run test
 
-    - name: Commit and push if it changed
+    - name: Update version in package.json from version field in openapi.json
       run: |-
         ./update_package_json_from_openapi_json.sh
-
-        git config user.name "Automated"
-        git config user.email "actions@users.noreply.github.com"
-        git add -A
-        git commit -m "Latest version: $(jq -r ".info.version" openapi.json)" || exit 0
-        git push
 
     - name: Check preconditions
       id: checks
@@ -73,8 +67,17 @@ jobs:
           echo "\`$version\` is already latest on NPM" >> $GITHUB_STEP_SUMMARY
         fi
 
+    - name: Commit and push if it changed
+      if: steps.checks.outputs.has_new_release == 'true'
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        git commit -m "Latest version: $(jq -r ".info.version" openapi.json)" || exit 0
+        git push
+
     - name: Publish
-#      if: steps.checks.outputs.has_new_release == 'true'
+      if: steps.checks.outputs.has_new_release == 'true'
       shell: bash
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
