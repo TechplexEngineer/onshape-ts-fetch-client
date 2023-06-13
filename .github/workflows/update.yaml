@@ -18,6 +18,12 @@ permissions:
 
 jobs:
   job:
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - onshape-ts-fetch-client
+
     runs-on: ubuntu-latest
     steps:
     - name: Check out this repo
@@ -47,3 +53,73 @@ jobs:
         git add -A
         git commit -m "Latest version: $(jq -r ".info.version" openapi.json)" || exit 0
         git push
+
+    - name: Check preconditions
+      id: checks
+      shell: bash
+      working-directory: ${{ matrix.package }}
+      run: |
+        latest="$(npm view --json ${{ matrix.package }} dist-tags.latest | jq -r)"
+        version="$(jq -r .version package.json)"
+        if [[ "$latest" != "$version" ]]; then
+          echo "Latest:  $latest"
+          echo "Current: $version"
+          
+          {
+            echo "version=$version"
+            echo "has_new_release=true"
+          } >> $GITHUB_OUTPUT
+        else
+          echo "Already up to date: $version"
+          echo "\`$version\` is already latest on NPM" >> $GITHUB_STEP_SUMMARY
+        fi
+
+    - name: Publish
+#      if: steps.checks.outputs.has_new_release == 'true'
+      shell: bash
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+      run: |
+        version="${{ steps.checks.outputs.version }}"
+        is_version_published="$(npm view ${{ matrix.package }} versions --json | jq -r '.[] | select(. == "'$version'") | . == "'$version'"')"
+        
+        if [[ "$is_version_published" == "true" ]]; then
+          echo "Version $version already published, adding tag $tag"
+          npm dist-tag add ${{ matrix.package }}@$version latest
+        else
+          echo echo "Publishing ${{ matrix.package }}@$version"
+          npm run pack
+          npm run publish
+        fi
+        echo "npm: \`+ ${{ matrix.package }}@$version\`" >> $GITHUB_STEP_SUMMARY
+
+    - name: Create GitHub release for ORM package
+      uses: actions/github-script@v6
+      if: matrix.package == 'onshape-ts-fetch-client' && steps.checks.outputs.has_new_release == 'true'
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          try {
+            const fs = require("fs");
+            const path = require("path");
+            const version = "${{ steps.checks.outputs.version }}";
+            const mmp = "1.164.16301-d273853a12e7".split("-")[0]; //major minor patch
+            const majorMinor = mmp.substring(0, mmp.lastIndexOf("."))
+            const release = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: `${version}`,
+              name: `${version}`,
+              body: `https://www.onshape.com/en/changelog/#${majorMinor}`,
+            });
+#            await github.rest.repos.uploadReleaseAsset({
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              release_id: release.data.id,
+#              name: `${{ matrix.package }}-${version}-dist.tgz`,
+#              data: fs.readFileSync(path.resolve("${{ matrix.package }}", "package.tgz")),
+#            });
+          } catch (e) {
+            core.setFailed(e.message);
+          }
+
