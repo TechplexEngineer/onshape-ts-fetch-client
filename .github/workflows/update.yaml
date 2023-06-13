@@ -112,13 +112,13 @@ jobs:
               name: `${version}`,
               body: `https://www.onshape.com/en/changelog/#${majorMinor}`,
             });
-#            await github.rest.repos.uploadReleaseAsset({
-#              owner: context.repo.owner,
-#              repo: context.repo.repo,
-#              release_id: release.data.id,
-#              name: `${{ matrix.package }}-${version}-dist.tgz`,
-#              data: fs.readFileSync(path.resolve("${{ matrix.package }}", "package.tgz")),
-#            });
+            // await github.rest.repos.uploadReleaseAsset({
+            //   owner: context.repo.owner,
+            //   repo: context.repo.repo,
+            //   release_id: release.data.id,
+            //   name: `${{ matrix.package }}-${version}-dist.tgz`,
+            //   data: fs.readFileSync(path.resolve("${{ matrix.package }}", "package.tgz")),
+            // });
           } catch (e) {
             core.setFailed(e.message);
           }
