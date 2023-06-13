@@ -14,7 +14,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "happy-dom"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",

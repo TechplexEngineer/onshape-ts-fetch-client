@@ -1,4 +1,10 @@
-name: Scrape latest data
+name: Publish NPM Package
+
+# Limit this work flow to 1 build/ref (branch) and cancel the build in progress when a new job kicks off
+# See: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
