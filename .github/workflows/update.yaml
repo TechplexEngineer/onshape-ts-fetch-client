@@ -14,7 +14,7 @@ on:
     # "At 00:00 on Wednesday."
 
 jobs:
-  scheduled:
+  job:
     runs-on: ubuntu-latest
     steps:
     - name: Check out this repo
@@ -28,6 +28,9 @@ jobs:
       run: ./get-spec-and-build.sh
 
     - name: Run Tests
+      env:
+        ONSHAPE_ACCESS_KEY: ${{ secrets.ONSHAPE_ACCESS_KEY }}
+        ONSHAPE_SECRET_KEY: ${{ secrets.ONSHAPE_SECRET_KEY }}
       run: |
         npm install
         npm run test
