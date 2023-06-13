@@ -1127,7 +1127,6 @@ export * from './GBTEntityInferenceType';
 export * from './GBTEntityType';
 export * from './GBTErrorStringEnum';
 export * from './GBTFeatureFilterExclusion';
-export * from './GBTFeatureScriptVersionNumber';
 export * from './GBTFilterFlattenedGeometryOptions';
 export * from './GBTGeometryType';
 export * from './GBTInsertableType';

@@ -18,6 +18,7 @@ apis/FolderApi.ts
 apis/InsertableApi.ts
 apis/MetadataApi.ts
 apis/MetadataCategoryApi.ts
+apis/NumberingSchemeApi.ts
 apis/OpenApiApi.ts
 apis/PartApi.ts
 apis/PartNumberApi.ts
@@ -1164,7 +1165,6 @@ models/GBTEntityInferenceType.ts
 models/GBTEntityType.ts
 models/GBTErrorStringEnum.ts
 models/GBTFeatureFilterExclusion.ts
-models/GBTFeatureScriptVersionNumber.ts
 models/GBTFilterFlattenedGeometryOptions.ts
 models/GBTGeometryType.ts
 models/GBTInsertableType.ts

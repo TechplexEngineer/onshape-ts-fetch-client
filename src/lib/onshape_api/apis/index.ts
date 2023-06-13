@@ -19,6 +19,7 @@ export * from './FolderApi';
 export * from './InsertableApi';
 export * from './MetadataApi';
 export * from './MetadataCategoryApi';
+export * from './NumberingSchemeApi';
 export * from './OpenApiApi';
 export * from './PartApi';
 export * from './PartNumberApi';
