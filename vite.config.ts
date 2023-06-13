@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { defineConfig } from 'vitest/config'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   build: {
@@ -8,5 +9,8 @@ export default defineConfig({
       name: 'onshape',
       fileName: (format) => `onshape.${format}.js`
     }
-  }
+  },
+  plugins: [
+      dts()
+    ]
 });

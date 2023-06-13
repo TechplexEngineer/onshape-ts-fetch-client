@@ -1,7 +1,0 @@
-.github
-get-spec-and-build.sh
-*.tar.gz
-*.tgz
-.env
-openapitools.json
-.idea
