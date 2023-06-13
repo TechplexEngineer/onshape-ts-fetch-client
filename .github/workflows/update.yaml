@@ -17,8 +17,15 @@ jobs:
     - name: Fetch OpenAPI Spec and generate code
       run: ./get-spec-and-build.sh
 
+    - name: Run Tests
+      run: |
+        npm install
+        npm run test
+
     - name: Commit and push if it changed
       run: |-
+        ./update_package_json_from_openapi_json.sh
+
         git config user.name "Automated"
         git config user.email "actions@users.noreply.github.com"
         git add -A
