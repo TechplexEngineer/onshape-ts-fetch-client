@@ -18,7 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out this repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
 
     - name: Fetch OpenAPI Spec and generate code
       run: ./get-spec-and-build.sh
