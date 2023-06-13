@@ -57,7 +57,6 @@ jobs:
     - name: Check preconditions
       id: checks
       shell: bash
-      working-directory: ${{ matrix.package }}
       run: |
         latest="$(npm view --json ${{ matrix.package }} dist-tags.latest | jq -r)"
         version="$(jq -r .version package.json)"
