@@ -513,6 +513,8 @@ models/BTMFeatureQueryWithOccurrence157.ts
 models/BTMFeatureQueryWithOccurrence157AllOf.ts
 models/BTMFolder3208.ts
 models/BTMFolder3208AllOf.ts
+models/BTMGenerativeDesignFeature3195.ts
+models/BTMGenerativeDesignFeature3195AllOf.ts
 models/BTMGeometryMate1260.ts
 models/BTMImport136.ts
 models/BTMInContextQuery2254.ts
@@ -655,6 +657,7 @@ models/BTMetadataEnumValueInfo.ts
 models/BTMetadataObjectInfo.ts
 models/BTMetadataObjectListInfoBTMetadataElementInfo.ts
 models/BTMetadataObjectListInfoBTMetadataPartInfo.ts
+models/BTMetadataObjectType.ts
 models/BTMetadataPartInfo.ts
 models/BTMetadataPartInfoAllOf.ts
 models/BTMetadataPropertyInfo.ts
