@@ -1,6 +1,6 @@
 {
   "name": "onshape-ts-fetch-client",
-  "version": "1.166.18273-3025d52f81b7",
+  "version": "1.166.18506-14c88dcadb12",
   "description": "Onshape Typescript Fetch client",
   "main": "./dist/onshape.umd.js",
   "module": "./dist/onshape.es.js",
