@@ -1,6 +1,11 @@
 Onshape Typescript Fetch client
 ===============================
 
+# WARNING: Unmaintained
+
+The openapi generator typescript-fetch generates code that does not compile.
+Recomment alternate approach such as: https://github.com/drwpow/openapi-typescript
+
 REST Api client for Onshape generated from Openapi spec https://cad.onshape.com/api/openapi using the typescript-fetch generator.
 
 See src/example.test.ts for a working example.
